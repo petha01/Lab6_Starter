@@ -25,12 +25,6 @@ function getRecipesFromStorage() {
   //           header. It is possible in only a single line, but should
   //           be no more than a few lines.
   const jsonFile = JSON.parse(window.localStorage.getItem('recipes'));
-
-  // var request = new XMLHttpRequest();
-  // request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
-  // request.send(null)
-  // var jsonFile = JSON.parse(request.responseText);
-
   return jsonFile;
 }
 
@@ -65,7 +59,8 @@ function saveRecipesToStorage(recipes) {
   // B1. TODO - Complete the functionality as described in this function
   //            header. It is possible in only a single line, but should
   //            be no more than a few lines.
-  const recipesStr = JSON.stringify(recipes);
+  
+  // const recipesStr = JSON.stringify(recipes);
   window.localStorage.setItem('recipes', recipesStr);
 }
 
@@ -82,6 +77,7 @@ function initFormHandler() {
   //            submit button is clicked
   let submitBtn = document.querySelector('button');
   submitBtn.addEventListener('submit', function() {
+    console.log('submit cicked')
     // Steps B4-B9 will occur inside the event listener from step B3
     // B4. TODO - Create a new FormData object from the <form> element reference above
     let formData = new FormData(formElement);
@@ -90,26 +86,18 @@ function initFormHandler() {
     //            values from the FormData object and insert them into recipeObject
     let recipeObject = new Object();
     for (var key of formData.keys()) {
-      recipeCard[key] = formData[key];
+      recipeObject[key] = formData[key];
     }
     // B6. TODO - Create a new <recipe-card> element
-    let recipeCard = document.createElement('recipe-card');
+    let newRecipeCard = document.createElement('recipe-card');
     // B7. TODO - Add the recipeObject data to <recipe-card> using element.data
-    recipeCard.data = recipeObject;
+    newRecipeCard.data = recipeObject;
     // B8. TODO - Append this new <recipe-card> to <main>
     let mainElement = document.querySelector('main');
-    mainElement.append(recipeCard);
+    mainElement.append(newRecipeCard);
     // B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
     //            then save the recipes array back to localStorage
-    // var request = new XMLHttpRequest();
-    // request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
-    // request.send(null);
-    // var jsonFile = JSON.parse(request.responseText);
-    // jsonFile.push(recipeObject);
-    // console.log(jsonFile);
-    // request.open("PUT", "../Lab6_Starter/reference/recipes.json", false);
-    // request.send(null);
-    const jsonFile = JSON.parse(window.localStorage.getItem('recipes'));
+    const jsonFile = getRecipesFromStorage();
     jsonFile.push(recipeObject);
     saveRecipesToStorage(jsonFile);
   });
