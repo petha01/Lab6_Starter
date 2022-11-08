@@ -105,8 +105,8 @@ function initFormHandler() {
     request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
     request.send(null);
     var jsonFile = JSON.parse(request.responseText);
-    jsonFile.append(recipeObject);
-    request.open("SET", "../Lab6_Starter/reference/recipes.json", false);
+    jsonFile.push(recipeObject);
+    request.open("PUT", "../Lab6_Starter/reference/recipes.json", false);
     request.send(null);
   });
 
