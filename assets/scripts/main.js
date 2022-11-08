@@ -24,12 +24,12 @@ function getRecipesFromStorage() {
   // A9. TODO - Complete the functionality as described in this function
   //           header. It is possible in only a single line, but should
   //           be no more than a few lines.
-  // const jsonFile = JSON.parse(window.localStorage.getItem('recipes'));
+  const jsonFile = JSON.parse(window.localStorage.getItem('recipes'));
 
-  var request = new XMLHttpRequest();
-  request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
-  request.send(null)
-  var jsonFile = JSON.parse(request.responseText);
+  // var request = new XMLHttpRequest();
+  // request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
+  // request.send(null)
+  // var jsonFile = JSON.parse(request.responseText);
 
   return jsonFile;
 }
@@ -81,7 +81,7 @@ function initFormHandler() {
   // B3. TODO - Add an event listener for the 'submit' event, which fires when the
   //            submit button is clicked
   let submitBtn = document.querySelector('button');
-  submitBtn.addEventListener('click', function() {
+  submitBtn.addEventListener('submit', function() {
     // Steps B4-B9 will occur inside the event listener from step B3
     // B4. TODO - Create a new FormData object from the <form> element reference above
     let formData = new FormData(formElement);
@@ -101,14 +101,17 @@ function initFormHandler() {
     mainElement.append(recipeCard);
     // B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
     //            then save the recipes array back to localStorage
-    var request = new XMLHttpRequest();
-    request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
-    request.send(null);
-    var jsonFile = JSON.parse(request.responseText);
+    // var request = new XMLHttpRequest();
+    // request.open("GET", "../Lab6_Starter/reference/recipes.json", false);
+    // request.send(null);
+    // var jsonFile = JSON.parse(request.responseText);
+    // jsonFile.push(recipeObject);
+    // console.log(jsonFile);
+    // request.open("PUT", "../Lab6_Starter/reference/recipes.json", false);
+    // request.send(null);
+    const jsonFile = JSON.parse(window.localStorage.getItem('recipes'));
     jsonFile.push(recipeObject);
-    console.log(jsonFile);
-    request.open("PUT", "../Lab6_Starter/reference/recipes.json", false);
-    request.send(null);
+    saveRecipesToStorage(jsonFile);
   });
 
   // B10. TODO - Get a reference to the "Clear Local Storage" button
